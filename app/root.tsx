@@ -7,10 +7,12 @@ import {
   ScrollRestoration,
 } from "react-router";
 
-import type { Route } from "./+types/root";
+// import type { Route } from "./+types/root";
 import "./app.css";
+import { Sidebar } from "./components/Sidebar";
+import { MobileNav } from "./components/MobileNav";
 
-export const links: Route.LinksFunction = () => [
+export const links: any = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
@@ -32,8 +34,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      <body className="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen">
+        <Sidebar />
+        <main className="md:pl-64 min-h-screen pb-20 md:pb-0 transition-all duration-300">
+          <div className="max-w-7xl mx-auto p-4 md:p-8">
+            {children}
+          </div>
+        </main>
+        <MobileNav />
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -45,7 +53,7 @@ export default function App() {
   return <Outlet />;
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+export function ErrorBoundary({ error }: any) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
